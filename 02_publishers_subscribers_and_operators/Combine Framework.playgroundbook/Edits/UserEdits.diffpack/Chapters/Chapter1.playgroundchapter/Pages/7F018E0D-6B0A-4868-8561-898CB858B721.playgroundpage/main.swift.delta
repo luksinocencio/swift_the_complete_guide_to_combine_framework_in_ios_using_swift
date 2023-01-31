@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+class MyClass { 
+    func understandingCancellable() {
+        let notification = Notification.Name("MyNotification")
+        let publisher = NotificationCenter.default.publisher(for: notification, object: nil)
+        
+        let subscription = publisher.sink { _ in
+            print("Notification recevied")
+        }
+        
+        NotificationCenter.default.post(name: notification, object: nil)
+        subscription.cancel()
+    }
+}
+
+let myClass = MyClass()
+myClass.understandingCancellable()
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 521}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

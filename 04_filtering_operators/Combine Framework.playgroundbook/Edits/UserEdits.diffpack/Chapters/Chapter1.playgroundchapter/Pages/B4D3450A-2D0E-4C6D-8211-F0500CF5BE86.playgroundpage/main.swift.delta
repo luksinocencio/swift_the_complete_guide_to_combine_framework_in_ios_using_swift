@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import UIKit
+import Combine
+
+/**
+ Challange: Filter all the things
+    Create an example that publishes a collection of numbers from through 100, and use filtering operators to:
+     1. Skip the first 50 values emitted by upstream publisher
+     2. Take the next 20 values after those first 50 values
+     3. Only take even numbers
+ */
+
+let numbers = (1...100).publisher
+numbers
+    .dropFirst(50)
+    .prefix(20)
+    .filter { $0 % 2 == 0 }
+    .sink { print($0) }
+
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 468}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

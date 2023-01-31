@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import UIKit
+import Combine
+
+struct Point { 
+    let x: Int
+    let y: Int
+}
+
+let publisher = PassthroughSubject&lt;Point, Never&gt;()
+
+publisher.map(\.x, \.y).sink { x, y in
+    print("x is \(x) and y is \(y)")
+}
+
+publisher.send(Point(x: 2, y: 10))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 244}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Combine
+import Foundation
+
+enum MyError: Error {
+    case someError
+}
+
+class StringSubscriber: Subscriber {
+    typealias Input = String
+    typealias Failure = MyError
+    
+    func receive(subscription: Subscription) {
+        print("Receveid Subscription")
+        subscription.request(.max(2)) // backpressure
+    }
+    
+    func receive(_ input: String) -&gt; Subscribers.Demand {
+        print("Recived value", input)
+        return .max(1)
+    }
+    
+    func receive(completion: Subscribers.Completion&lt;MyError&gt;) {
+        print("completion")
+    }
+}
+
+
+class MyClass { 
+    func subjects() {
+        var subscriber = StringSubscriber()
+        var subject = PassthroughSubject&lt;String, MyError&gt;()
+        
+        subject.subscribe(subscriber)
+        
+        let subscription = subject.sink { completion in
+            print("Recevied completion from sink \(completion)")
+        } receiveValue: { value in
+            print("Recevied value from sink \(value)")
+        }
+        
+        subject.send("A")
+        subject.send("B")
+        subject.send("C")
+        subscription.cancel()
+        
+        subject.send("D")
+        subject.send("E")
+    }
+}
+
+let myClass = MyClass()
+myClass.subjects()
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 1214}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
