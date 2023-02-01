@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import UIKit
+import Combine
+
+let images = ["houston", "denver", "seatle"]
+var subs: AnyCancellable?
+var index = 0
+
+func getImage() -&gt; AnyPublisher&lt;String?, Never&gt; { 
+    return Future&lt;String?, Never&gt; { promise in
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) { 
+            promise(.success(images[index]))
+        }
+    }
+    .map { $0 }
+    .receive(on: RunLoop.main)
+    .eraseToAnyPublisher()
+}
+
+let taps = PassthroughSubject&lt;Void, Never&gt;()
+
+let subscription = taps.map { _ in getImage() }
+    .switchToLatest()
+    .sink { print($0) }
+
+// houston
+taps.send()
+
+// denver
+DispatchQueue.main.asyncAfter(deadline: .now() + 6.0) { 
+    index += 1
+    taps.send()
+}
+
+// seatle
+DispatchQueue.main.asyncAfter(deadline: .now() + 6.5) { 
+    index += 1
+    taps.send()
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 786}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

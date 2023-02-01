@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import UIKit
+import Combine
+
+let publisher1 = PassthroughSubject&lt;String, Never&gt;()
+let publisher2 = PassthroughSubject&lt;String, Never&gt;()
+
+let publishers = PassthroughSubject&lt;PassthroughSubject&lt;String, Never&gt;, Never&gt;()
+
+publishers.switchToLatest().sink(receiveValue: { 
+    print($0)
+})
+
+publishers.send(publisher1)
+
+publisher1.send("Publisher 1 - Value 1")
+publisher1.send("Publisher 1 - Value 2")
+
+publishers.send(publisher2)
+
+publisher2.send("Publisher 2 - Value 1")
+
+publisher1.send("Publisher 1 - Value 3")
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 509}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
