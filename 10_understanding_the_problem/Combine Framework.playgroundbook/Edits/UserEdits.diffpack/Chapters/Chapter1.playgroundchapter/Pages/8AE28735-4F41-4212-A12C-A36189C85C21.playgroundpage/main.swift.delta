@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+import Combine
+
+//var subscription3: AnyCancellable? = nil
+let subject = PassthroughSubject&lt;Data, URLError&gt;()
+
+guard let url = URL(string: "https://jsonplacheholder.typicodde.com/posts") else { 
+    fatalError("Invalid URL")
+}
+
+let request = URLSession.shared.dataTaskPublisher(for: url)
+    .map(\.data)
+    .print()
+    .multicast(subject: subject)
+
+let subscription1 = request
+    .sink(
+        receiveCompletion: { _ in }, 
+        receiveValue: {
+            print("Subscription 1")
+            print($0) 
+        }
+    )
+
+let subscription2 = request
+    .sink(
+        receiveCompletion: { _ in }, 
+        receiveValue: { 
+            print("Subscription 2")
+            print($0)
+        }
+    )
+
+let subscription3 = request
+    .sink(
+        receiveCompletion: { _ in },
+        receiveValue: { 
+            print("Subscription 3")
+            print($0) 
+        }
+    )
+
+request.connect()
+subject.send(Data())
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 940}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
